@@ -75,7 +75,7 @@ const SUPERBASE = createClient(process.env.DATABASE, process.env.SB_PUBLIC_KEY)
 router.post(`/api`, async (req, res) => {
 	let mentionContent = null
 	//----- CHECK THE POST IS FROM TRELLO
-	const CONTENT = JSON.stringify(req.body) + 'process.env.END_POINT'
+	const CONTENT = JSON.stringify(req.body) + process.env.END_POINT
 	const DOUBLE_HASH = base64Digest(CONTENT)
 	const HEADER_HASH = req.headers['x-trello-webhook']
 
