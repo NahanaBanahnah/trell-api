@@ -41,10 +41,7 @@ const base64Digest = s => {
 /**
  * @summary set up database
  */
-const SUPERBASE = createClient(
-	'https://xekexntwqyfphilgonpp.supabase.co',
-	process.env.SB_PUBLIC_KEY
-)
+const SUPERBASE = createClient(process.env.DATABASE, process.env.SB_PUBLIC_KEY)
 
 /**
  * TODO Look at these being set here ...
@@ -60,8 +57,8 @@ const SUPERBASE = createClient(
 // 		`https://api.trello.com/1/tokens/${TOKEN}/webhooks/?key=${KEY}`,
 // 		{
 // 			description: 'Public Graphics Webhook',
-// 			callbackURL: 'https://trello.nahana.net/api',
-// 			idModel: '62d5f89049b4ce140f831fec',
+// 			callbackURL: 'process.env.END_POINT',
+// 			idModel: 'board id',
 // 		}
 // 	)
 // })
@@ -78,7 +75,7 @@ const SUPERBASE = createClient(
 router.post(`/api`, async (req, res) => {
 	let mentionContent = null
 	//----- CHECK THE POST IS FROM TRELLO
-	const CONTENT = JSON.stringify(req.body) + 'https://trello.nahana.net/api'
+	const CONTENT = JSON.stringify(req.body) + 'process.env.END_POINT'
 	const DOUBLE_HASH = base64Digest(CONTENT)
 	const HEADER_HASH = req.headers['x-trello-webhook']
 
